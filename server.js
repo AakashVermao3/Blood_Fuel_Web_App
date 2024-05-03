@@ -3,9 +3,15 @@ const dotenv = require('dotenv');
 const colors = require('colors');
 const morgan = require('morgan');
 const cors = require('cors');
+const connectDB = require('./config/db');
 
 //dot config
 dotenv.config(); //it .env file was in some fole then we have to give the path on to bricaket
+
+
+//mongodb config
+connectDB();
+
 
 
 //rest object
