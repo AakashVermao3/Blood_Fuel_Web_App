@@ -20,10 +20,10 @@ const inventorySchema = new mongoose.Schema({
 
     },
 
-    organization:{
+    organisation:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'users',
-        required:[true,'organization is required']
+        required:[true,'organisation is required']
 
     },
 
@@ -66,4 +66,4 @@ const inventorySchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.module('Inventory',inventorySchema)
+module.exports = mongoose.model("Inventory",inventorySchema);
