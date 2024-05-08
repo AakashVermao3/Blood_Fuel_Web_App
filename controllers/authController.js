@@ -1,5 +1,6 @@
 const userModel = require("../models/userModel");
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 const registerController =async (req,res) => {
     try{
@@ -7,7 +8,7 @@ const registerController =async (req,res) => {
         //validation
         if(exisitingUser){
             return res.status(200).send({
-                sucess:false,
+                success:false,
                 message:'User Already exists'
             })
         }
@@ -19,7 +20,7 @@ const registerController =async (req,res) => {
         const user = new userModel(req.body)
         await user.save()
         return res.status(201).send({        ////201 means some thing or data is succesluy enetred in data base
-            sucess:true,
+            success:true,
             message:'User Registers Sucessfully',
             user,
 
@@ -27,7 +28,7 @@ const registerController =async (req,res) => {
     } catch (error){
         console.log(error)
         res.status(500).send({
-            sucess:false,
+            success:false,
             message:'Error In Register API',
             error
         })
@@ -35,4 +36,44 @@ const registerController =async (req,res) => {
 };
 
 
-module.exports = { registerController};
+//login call back
+const loginController = async (req,res) => {
+    try{
+        const user = await userModel.findOne({email:req.body.email});
+        if(!user){
+            return res.status(404).send({
+                success:false,
+                message:'Invalid Cradentials'
+            });
+        };
+        //compare password if user found
+        const comparePassword = await bcrypt.compare(req.body.password, user.password)
+        if (!comparePassword){
+            return res.status(500).send({
+                success:false,
+                message:'Invalid Cradentials'
+                
+            })
+        }
+  
+        const token = jwt.sign({userId:user._id},process.env.JWT_SECRET,{expiresIn:'1d'})  // createing of jwt token for user id to get the user detalits through token
+                                                                                            /// set up the jwt token validation time for security purpose
+        return  res.status(200).send({
+            success:true,
+            message:'Login Successfuly',
+            token,
+            user,
+
+        });                                                                                   
+    }catch (error) {
+        console.log(error)
+        res.status(500).send({
+            success:false,
+            message:'Error in login API',
+            error
+        })
+    }
+}; 
+
+
+module.exports = { registerController, loginController};
