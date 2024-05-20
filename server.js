@@ -33,7 +33,7 @@ app.use("/api/v1/inventory",require("./routes/inventoryRoutes"));
 
 
 //port
-const PORT = process.env.PORT || 8091;
+const PORT  = process.env.PORT || 3090;
 
 //liaten
 app.listen(PORT , () => {

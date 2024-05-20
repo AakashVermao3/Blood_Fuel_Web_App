@@ -3,25 +3,24 @@ import InputType from "./InputType";
 import { Link } from "react-router-dom";
 import { handleLogin, handleRegister } from "../../../services/authService";
 
-// import React from 'react'
-
 const Form = ({ formType, submitBtn, formTitle }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("donar");
+  const [role, setRole] = useState("donor");
   const [name, setName] = useState("");
   const [organisationName, setOrganisationName] = useState("");
   const [hospitalName, setHospitalName] = useState("");
   const [website, setWebsite] = useState("");
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+
   return (
     <div>
       <form
         onSubmit={(e) => {
-          if (formType === "login")
+          if (formType === "login") {
             return handleLogin(e, email, password, role);
-          else if (formType === "register")
+          } else if (formType === "register") {
             return handleRegister(
               e,
               name,
@@ -34,6 +33,7 @@ const Form = ({ formType, submitBtn, formTitle }) => {
               hospitalName,
               website
             );
+          }
         }}
       >
         <h1 className="text-center">{formTitle}</h1>
@@ -44,15 +44,18 @@ const Form = ({ formType, submitBtn, formTitle }) => {
               type="radio"
               className="form-check-input"
               name="role"
-              id="donarRadio"
-              value={"donar"}
+              id="donorRadio"
+              value={"donor"}
               onChange={(e) => setRole(e.target.value)}
               defaultChecked
             />
-            <label htmlFor="adminRadio" className="form-check-label">
-              Donar
+            <label htmlFor="donorRadio" className="form-check-label">
+              Donor
             </label>
           </div>
+
+          
+          {/* registration of admin
           <div className="form-check ms-2">
             <input
               type="radio"
@@ -65,7 +68,28 @@ const Form = ({ formType, submitBtn, formTitle }) => {
             <label htmlFor="adminRadio" className="form-check-label">
               Admin
             </label>
-          </div>
+          </div> */}
+
+
+
+
+
+          {formType === "login" && (
+            <div className="form-check ms-2">
+              <input
+                type="radio"
+                className="form-check-input"
+                name="role"
+                id="adminRadio"
+                value={"admin"}
+                onChange={(e) => setRole(e.target.value)}
+              />
+              <label htmlFor="adminRadio" className="form-check-label">
+                Admin
+              </label>
+            </div>
+          )}
+
           <div className="form-check ms-2">
             <input
               type="radio"
@@ -94,15 +118,17 @@ const Form = ({ formType, submitBtn, formTitle }) => {
           </div>
         </div>
 
-        {/* switch statement */}
+
+
+ {/* switch statement */}
         {(() => {
-          //eslint-disable-next-line
+           //eslint-disable-next-line
           switch (true) {
             case formType === "login": {
               return (
                 <>
                   <InputType
-                    labelText={"email"}
+                    labelText={"Email"}
                     labelFor={"forEmail"}
                     inputType={"email"}
                     name={"email"}
@@ -120,11 +146,15 @@ const Form = ({ formType, submitBtn, formTitle }) => {
                 </>
               );
             }
-
             case formType === "register": {
               return (
                 <>
-                  {(role === "admin" || role === "donar") && (
+                {/* for admin registration:
+                {(role === "admin" || role === "donar") && (  */}
+
+                
+                  {(role === "donor" ) && (       
+
                     <InputType
                       labelText={"Name"}
                       labelFor={"forName"}
@@ -137,7 +167,7 @@ const Form = ({ formType, submitBtn, formTitle }) => {
                   {role === "organisation" && (
                     <InputType
                       labelText={"Organisation Name"}
-                      labelFor={"fororganisationName"}
+                      labelFor={"forOrganisationName"}
                       inputType={"text"}
                       name={"organisationName"}
                       value={organisationName}
@@ -154,9 +184,8 @@ const Form = ({ formType, submitBtn, formTitle }) => {
                       onChange={(e) => setHospitalName(e.target.value)}
                     />
                   )}
-
                   <InputType
-                    labelText={"email"}
+                    labelText={"Email"}
                     labelFor={"forEmail"}
                     inputType={"email"}
                     name={"email"}
@@ -172,7 +201,7 @@ const Form = ({ formType, submitBtn, formTitle }) => {
                     onChange={(e) => setPassword(e.target.value)}
                   />
                   <InputType
-                    labelText={"website"}
+                    labelText={"Website"}
                     labelFor={"forWebsite"}
                     inputType={"text"}
                     name={"website"}
@@ -204,13 +233,13 @@ const Form = ({ formType, submitBtn, formTitle }) => {
         <div className="d-flex flex-row justify-content-between">
           {formType === "login" ? (
             <p>
-              Not registerd yet ? Register
-              <Link to="/register"> Here !</Link>
+              Not registered yet? Register
+              <Link to="/register"> Here!</Link>
             </p>
           ) : (
             <p>
-              ALready Usser Please
-              <Link to="/login"> Login !</Link>
+              Already a user? Please
+              <Link to="/login"> Login!</Link>
             </p>
           )}
           <button className="btn btn-primary" type="submit">
