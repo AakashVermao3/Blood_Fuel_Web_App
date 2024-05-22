@@ -1,21 +1,27 @@
-// import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 // import { getCurrentUser, userLogin, userRegister } from "./authActions";
 
 // const token = localStorage.getItem("token")
 //   ? localStorage.getItem("token")
 //   : null;
 
-// const initialState = {
-//   loading: false,
-//   user: null,
-//   token,
-//   error: null,
-// };
 
-// const authSlice = createSlice({
-//   name: "auth",
-//   initialState: initialState,
-//   reducers: {},
+const initialState = {
+  loading: false,
+  user: null,
+  token:null,
+  error: null,
+};
+
+
+
+const authSlice = createSlice({
+  name: "auth",
+  initialState: initialState,
+  reducers: {},
+  extraReducers:{},
+});
+
 //   extraReducers: (builder) => {
 //     // login user
 //     builder.addCase(userLogin.pending, (state) => {
@@ -60,4 +66,4 @@
 //   },
 // });
 
-// export default authSlice;
+export default authSlice;
