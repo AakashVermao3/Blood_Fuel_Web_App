@@ -7,6 +7,7 @@ const Modal = () => {
   const [inventoryType, setInventoryType] = useState("in");
   const [bloodGroup, setBloodGroup] = useState("");
   const [quantity, setQuantity] = useState(0);
+  //const [donar eamilemail, setEmail] = useState("");  // yy likha tha vedio mai
   const [email, setEmail] = useState("");
   const { user } = useSelector((state) => state.auth);
   // handle modal data
@@ -16,7 +17,7 @@ const Modal = () => {
         return alert("Please Provide All Fields");
       }
       const { data } = await API.post("/inventory/create-inventory", {
-        email,
+        email,    //email:user?.email,  //kra tha idr
         organisation: user?._id,
         inventoryType,
         bloodGroup,
@@ -77,7 +78,7 @@ const Modal = () => {
                 <div className="form-check ms-3">
                   <input
                     type="radio"
-                    name="inRadio"
+                    name="inRadio"  
                     value={"out"}
                     onChange={(e) => setInventoryType(e.target.value)}
                     className="form-check-input"
@@ -95,7 +96,7 @@ const Modal = () => {
                 <option defaultValue={"Open this select menu"}>
                   Open this select menu
                 </option>
-                <option value={"O+"}>O+</option>
+                <option value={"O+"}>O+</option> 
                 <option value={"O-"}>O-</option>
                 <option value={"AB+"}>AB+</option>
                 <option value={"AB-"}>AB-</option>

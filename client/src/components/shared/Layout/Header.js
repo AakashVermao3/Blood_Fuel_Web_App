@@ -6,6 +6,7 @@ const Header = () => {
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
   const location = useLocation();
+  
   // logout handler
   const handleLogout = () => {
     localStorage.clear();
@@ -18,7 +19,7 @@ const Header = () => {
       <nav className="navbar">
         <div className="container-fluid ">
           <div className="navbar-brand h1 ">
-            <BiDonateBlood color="red" /> Blood Bank App
+            <BiDonateBlood color="red" /> Blood Fuel
           </div>
           <ul className="navbar-nav flex-row">
             <li className="nav-item mx-3">
