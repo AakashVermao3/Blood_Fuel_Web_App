@@ -15,7 +15,17 @@ const Form = ({ formType, submitBtn, formTitle }) => {
   const [phone, setPhone] = useState("");
 
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
+      <img
+        src="/assets/images/Circ2.png"
+        alt="Logo"
+        style={{
+          width: "30%",
+          marginBottom: "10px",
+          display: "block",
+          margin: "10px auto 0 auto",
+        }}
+      />
       <form
         onSubmit={(e) => {
           if (formType === "login") {
@@ -53,27 +63,6 @@ const Form = ({ formType, submitBtn, formTitle }) => {
               Donor
             </label>
           </div>
-
-          
-          {/* registration of admin
-          <div className="form-check ms-2">
-            <input
-              type="radio"
-              className="form-check-input"
-              name="role"
-              id="adminRadio"
-              value={"admin"}
-              onChange={(e) => setRole(e.target.value)}
-            />
-            <label htmlFor="adminRadio" className="form-check-label">
-              Admin
-            </label>
-          </div> */}
-
-
-
-
-
           {formType === "login" && (
             <div className="form-check ms-2">
               <input
@@ -89,7 +78,6 @@ const Form = ({ formType, submitBtn, formTitle }) => {
               </label>
             </div>
           )}
-
           <div className="form-check ms-2">
             <input
               type="radio"
@@ -117,12 +105,8 @@ const Form = ({ formType, submitBtn, formTitle }) => {
             </label>
           </div>
         </div>
-
-
-
- {/* switch statement */}
         {(() => {
-           //eslint-disable-next-line
+          //eslint-disable-next-line
           switch (true) {
             case formType === "login": {
               return (
@@ -149,12 +133,7 @@ const Form = ({ formType, submitBtn, formTitle }) => {
             case formType === "register": {
               return (
                 <>
-                {/* for admin registration:
-                {(role === "admin" || role === "donar") && (  */}
-
-                
-                  {(role === "donor" ) && (       
-
+                  {role === "donor" && (
                     <InputType
                       labelText={"Name"}
                       labelFor={"forName"}
@@ -229,7 +208,6 @@ const Form = ({ formType, submitBtn, formTitle }) => {
             }
           }
         })()}
-
         <div className="d-flex flex-row justify-content-between">
           {formType === "login" ? (
             <p>

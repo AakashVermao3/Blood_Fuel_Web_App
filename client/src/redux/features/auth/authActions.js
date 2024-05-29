@@ -6,12 +6,12 @@ export const userLogin = createAsyncThunk(
   "auth/login",
   async ({ role, email, password }, { rejectWithValue }) => {
     try {
-      const { data } = await API.post('/auth/login', { role, email, password });
+      const { data } = await API.post("/auth/login", { role, email, password });
       //store token
       if (data.success) {
         alert(data.message);
-        localStorage.setItem('token', data.token);
-        // toast.success(data.message)  ///// y line ab hata ya gaya 
+        localStorage.setItem("token", data.token);
+        // toast.success(data.message)  ///// y line ab hata ya gaya
         window.location.replace("/");
       }
       return data;
@@ -54,7 +54,7 @@ export const userRegister = createAsyncThunk(
         hospitalName,
         website,
       });
-      if (data?.success) {     
+      if (data?.success) {
         alert("User Registerd Successfully");
         window.location.replace("/login");
         // toast.success("User Registerd Successfully");
@@ -70,15 +70,15 @@ export const userRegister = createAsyncThunk(
   }
 );
 
-
-
-
 // Admin Register
 export const adminRegister = createAsyncThunk(
   "auth/adminRegister",
   async (adminData, { rejectWithValue }) => {
     try {
-      const { data } = await API.post("/auth/register", { ...adminData, role: 'admin' });
+      const { data } = await API.post("/auth/register", {
+        ...adminData,
+        role: "admin",
+      });
       if (data.success) {
         alert("Admin Registered Successfully");
         window.location.replace("/login");
@@ -95,30 +95,14 @@ export const adminRegister = createAsyncThunk(
   }
 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 //current user
 export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
   async ({ rejectWithValue }) => {
     try {
       const res = await API.get("/auth/current-user");
-      if (res?.data) {  //?mark ate ga
+      if (res?.data) {
+        //?mark ate ga
         return res?.data;
       }
     } catch (error) {
@@ -131,4 +115,3 @@ export const getCurrentUser = createAsyncThunk(
     }
   }
 );
-

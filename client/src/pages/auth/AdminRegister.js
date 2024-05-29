@@ -1,5 +1,3 @@
-// client/src/pages/auth/AdminRegister.js
-
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { adminRegister } from "../../redux/features/auth/authAction";
@@ -97,8 +95,8 @@ const AdminRegister = () => {
             Register
           </button>
         </div>
-        {status === 'loading' && <p>Loading...</p>}
-        {status === 'failed' && <p>{error}</p>}
+        {status === "loading" && <p>Loading...</p>}
+        {status === "failed" && <p>{error}</p>}
       </form>
     </div>
   );
