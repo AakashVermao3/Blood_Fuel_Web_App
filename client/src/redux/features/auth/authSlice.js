@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { getCurrentUser, userLogin, userRegister } from "./authActions";
+import { getCurrentUser, userLogin, userRegister, adminRegister } from "./authActions";
+
 
 const token = localStorage.getItem("token")
   ? localStorage.getItem("token")
@@ -44,6 +45,31 @@ const authSlice = createSlice({
       state.loading = false;
       state.error = payload;
     });
+
+
+        // Handle admin registration
+        builder.addCase(adminRegister.pending, (state) => {
+        state.status = 'loading';
+      })
+      builder.addCase(adminRegister.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      builder.addCase(adminRegister.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      })
+
+
+
+
+
+
+
+
+
+
+
     // CURRENT user
     builder.addCase(getCurrentUser.pending, (state) => {
       state.loading = true;

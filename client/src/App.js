@@ -3,14 +3,11 @@
 // import Register from './pages/auth/Register';
 // import Login from './pages/auth/Login';
 
-
-
-
 // function App() {
 //   return (
 
 //     ///routing  "<> creation of emty opening and closing tag or it is a fragement"
-//     <> 
+//     <>
 //      <Routes>
 //      <Route path="/" element={<HomePage/>}/>
 //      <Route path="/login" element={<Login/>}/>
@@ -20,17 +17,7 @@
 //   );
 // }
 
-
-
-
-
-
-
-
 // export default App;
-
-
-
 
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
@@ -50,6 +37,10 @@ import DonarList from "./pages/Admin/DonarList";
 import HospitalList from "./pages/Admin/HospitalList";
 import OrgList from "./pages/Admin/OrgList";
 import AdminHome from "./pages/Admin/AdminHome";
+
+//admin register seprate page
+import AdminRegister from "./pages/auth/AdminRegister";
+
 function App() {
   return (
     <>
@@ -160,10 +151,19 @@ function App() {
             </PublicRoute>
           }
         />
+    
+
+    {/* admin page special page */}
+        <Route path="/admin-register" 
+        element={
+          <PublicRoute>
+          <AdminRegister />
+        </PublicRoute>
+        } 
+        />
       </Routes>
     </>
   );
 }
 
 export default App;
-

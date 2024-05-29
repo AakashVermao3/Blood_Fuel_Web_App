@@ -188,6 +188,8 @@ const getDonarsController = async (req, res) => {
   }
 };
 
+
+//hospital controller
 const getHospitalController = async (req, res) => {
   try {
     const organisation = req.body.userId;

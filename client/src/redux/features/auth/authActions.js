@@ -70,6 +70,48 @@ export const userRegister = createAsyncThunk(
   }
 );
 
+
+
+
+// Admin Register
+export const adminRegister = createAsyncThunk(
+  "auth/adminRegister",
+  async (adminData, { rejectWithValue }) => {
+    try {
+      const { data } = await API.post("/auth/register", { ...adminData, role: 'admin' });
+      if (data.success) {
+        alert("Admin Registered Successfully");
+        window.location.replace("/login");
+        return data;
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response && error.response.data.message) {
+        return rejectWithValue(error.response.data.message);
+      } else {
+        return rejectWithValue(error.message);
+      }
+    }
+  }
+);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //current user
 export const getCurrentUser = createAsyncThunk(
   "auth/getCurrentUser",
@@ -89,3 +131,4 @@ export const getCurrentUser = createAsyncThunk(
     }
   }
 );
+

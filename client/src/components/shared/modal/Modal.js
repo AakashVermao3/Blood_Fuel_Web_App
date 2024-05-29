@@ -7,7 +7,6 @@ const Modal = () => {
   const [inventoryType, setInventoryType] = useState("in");
   const [bloodGroup, setBloodGroup] = useState("");
   const [quantity, setQuantity] = useState(0);
-  //const [donar eamilemail, setEmail] = useState("");  // yy likha tha vedio mai
   const [email, setEmail] = useState("");
   const { user } = useSelector((state) => state.auth);
   // handle modal data
@@ -17,7 +16,7 @@ const Modal = () => {
         return alert("Please Provide All Fields");
       }
       const { data } = await API.post("/inventory/create-inventory", {
-        email,    //email:user?.email,  //kra tha idr
+        email,    
         organisation: user?._id,
         inventoryType,
         bloodGroup,

@@ -1,74 +1,126 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 
 
-const inventorySchema = new mongoose.Schema({
-    inventoryType:{
-        type:String,
-        required:[true,'inventory type require'],
-        enum:['in', 'out']
+// const inventorySchema = new mongoose.Schema({
+//     inventoryType:{
+//         type:String,
+//         required:[true,'inventory type require'],
+//         enum:['in', 'out']
       
-    },
-    bloodGroup:{
-        type:String,
-        required : [true,'blood group is required'],
-        enum:["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
+//     },
+//     bloodGroup:{
+//         type:String,
+//         required : [true,'blood group is required'],
+//         enum:["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"]
     
-    },
-    quantity:{
-        type:Number,
-        require:[true,'blood quantity is required']
+//     },
+//     quantity:{
+//         type:Number,
+//         require:[true,'blood quantity is required']
 
+//     },
+// ////donarEmail
+//     email: {
+//         type: String,
+//         required: [true, "Donar Email is Required"],
+//       },
+
+//     organisation:{
+//         type:mongoose.Schema.Types.ObjectId,
+//         ref:'users',
+//         required:[true,'organisation is required']
+
+//     },
+
+//     hospital:{
+//         type:mongoose.Schema.Types.ObjectId,
+//         ref:'users',
+//         required : function(){
+//             return this.inventoryType == "out"
+
+//         }
+//     },
+
+//     donar:{
+//         type:mongoose.Schema.Types.ObjectId,
+//         ref:'users',
+//         require : function () {
+//             return this.inventoryType == "in";
+
+//         },
+
+//     }, 
+    
+// /////viewer it is custom made by this project only 
+//    viewer:{
+//         type:mongoose.Schema.Types.ObjectId,
+//         ref:'users',
+//         require : function () {
+//             return this.inventoryType == "in";
+
+//         },
+
+//     }, 
+
+
+// },{timestamps: true}
+// );
+
+
+
+
+
+
+// module.exports = mongoose.model("Inventory",inventorySchema);
+
+
+
+
+
+
+const mongoose = require("mongoose");
+
+const inventorySchema = new mongoose.Schema(
+  {
+    inventoryType: {
+      type: String,
+      required: [true, "inventory type require"],
+      enum: ["in", "out"],
     },
-////donarEmail
+    bloodGroup: {
+      type: String,
+      required: [true, "blood group is require"],
+      enum: ["O+", "O-", "AB+", "AB-", "A+", "A-", "B+", "B-"],
+    },
+    quantity: {
+      type: Number,
+      require: [true, "blood quanity is require"],
+    },
     email: {
-        type: String,
-        required: [true, "Donar Email is Required"],
+      type: String,
+      required: [true, "Donar Email is Required"],
+    },
+    organisation: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: [true, "organisation is require"],
+    },
+    hospital: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: function () {
+        return this.inventoryType === "out";
       },
-
-    organisation:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'users',
-        required:[true,'organisation is required']
-
     },
-
-    hospital:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'users',
-        required : function(){
-            return this.inventoryType == "out"
-
-        }
+    donar: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
+      required: function () {
+        return this.inventoryType === "in";
+      },
     },
-
-    donar:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'users',
-        require : function () {
-            return this.inventoryType == "in";
-
-        },
-
-    }, 
-    
-/////viewer it is custom made by this project only 
-   viewer:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'users',
-        require : function () {
-            return this.inventoryType == "in";
-
-        },
-
-    }, 
-
-
-},{timestamps: true}
+  },
+  { timestamps: true }
 );
 
-
-
-
-
-
-module.exports = mongoose.model("Inventory",inventorySchema);
+module.exports = mongoose.model("Inventory", inventorySchema);
